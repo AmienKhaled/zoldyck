@@ -1,0 +1,3 @@
+include zoldyck/messengerBot/*.py
+include zoldyck/messengerBot/handlers/*.py
+include zoldyck/messengerBot/structure/*.py
