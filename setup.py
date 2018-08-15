@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='zoldyck',
-      version='1.0',
+      version='1.1',
       description='is Universal Package for making Chatbots easy .this version 1.0, and it include only facebook messenger',
       url='https://github.com/AmienKhaled/zoldyck',
       author='Amien Khaled Amien',
