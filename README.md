@@ -63,7 +63,10 @@ full package documentation well be avilable soon !
   - [Get Quick Reply Payload](http://github.com)
   - [Get latitude and longitude](http://github.com)
   - [Get text from voice message](http://github.com)
-
+  - [Get first name of the user](http://github.com)
+  - [Get last name of the user](http://github.com)
+  - [Get gender the user](http://github.com)
+  - [Get all info of the user](http://github.com)
 ## Installation
 
 ```python
