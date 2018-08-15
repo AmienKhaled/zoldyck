@@ -1,6 +1,8 @@
 
 
 class jsonHandler():
+ 
+        
 
     def checkForMessageAttr(self, receivedJson):
         """check for message attribute inside the json
@@ -188,4 +190,18 @@ class jsonHandler():
         """
 
         return receivedJson["entry"][0]["messaging"][0].get("message").get("attachments")[0].get("payload").get("coordinates")
+
+
+    def returnPageID(self, receivedJson):
+        """return page ID
+        
+        Arguments:
+            receivedJson {json object} -- json reseced by server when it has post request for incomming messsage
+        
+        Returns:
+            string -- page id
+        """
+
+        return receivedJson["entry"][0]["messaging"][0]["recipient"]["id"]
+
 
