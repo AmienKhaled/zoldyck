@@ -29,6 +29,7 @@ class messenger(jsonHandler, simpleMsg, quickReplies, templates, buttons):
         self.URL_BASE_TEMPS = "https://graph.facebook.com/me/"
         self.post_url = "messages?access_token="
         self.assest_url = "message_attachments?access_token="
+        self.get_value_link = "https://graph.facebook.com/v3.1/"
 
     def URL_TO_POST(self, url):
         """return the required url to the api
@@ -72,13 +73,83 @@ class messenger(jsonHandler, simpleMsg, quickReplies, templates, buttons):
 
         if assest:
             post_message_url = self.URL_TO_POST(self.assest_url)
-        else :
+        else:
             post_message_url = self.URL_TO_POST(self.post_url)
 
         headers = {"Content-Type": "application/json"}
         req = requests.post(post_message_url, headers=headers, data=jsonToSend, timeout=20)
 
         return req 
+
+    def sender_GET(self, res_ID, field=""):
+        """send requests to Graph API using GET request
+        
+        Arguments:
+            res_ID {string} -- recipient id
+        
+        Keyword Arguments:
+            field {string} -- the requeired feild from facebook (default: {""})
+        
+        Returns:
+            response objec -- response object from the get requst
+        """
+
+        post_message_url = self.get_value_link+res_ID+"?fields="+field+"&access_token="+self.ACCESS_TOKEN
+        headers = {"Content-Type": "application/json"}
+        req = requests.get(post_message_url, headers=headers, timeout=20)
+        return req
+
+    def returnUserFirstName(self, res_ID):
+        """return user first name
+        
+        Arguments:
+            res_ID {string} -- recipient id
+        
+        Returns:
+            string -- user first name
+        """
+
+        req = self.sender_GET(res_ID, "first_name")
+        return req.json()["first_name"]
+
+    def returnUserLastName(self, res_ID):
+        """return user last name
+        
+        Arguments:
+            res_ID {string} -- recipient id
+        
+        Returns:
+            string -- user last name
+        """
+
+        req = self.sender_GET(res_ID, "last_name")
+        return rreq.json()["last_name"]
+
+    def returnUserGender(self, res_ID):
+        """return user gender
+        
+        Arguments:
+            res_ID {string} -- recipient id
+        
+        Returns:
+            string -- user gender
+        """
+
+        req = self.sender_GET(res_ID, "gender")
+        return req.json()["gender"]
+
+    def returnAllinfo(self, ):
+        """return all user info (name , first_name, last_name, profile_pic, id)
+        
+        Arguments:
+            res_ID {string} -- recipient id
+        
+        Returns:
+            json -- all user info (name , first_name, last_name, profile_pic, id)
+        """
+
+        req = self.sender_GET(res_ID)
+        return req.json()
 
     def savingAssests(self, type_of_content, url):
         """save assests to facebook server
